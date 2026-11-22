@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Factorio Space System Editor v7.49</title>
+<title>Factorio Space System Editor v7.50</title>
 <style>
 :root{
   --bg:#eef2f6;--panel:#ffffff;--canvas:#ffffff;--field:#ffffff;--soft:#fbfcfd;
@@ -1548,7 +1548,7 @@ input[type="number"]::-webkit-outer-spin-button{
         <button id="helpBtn">Help</button>
         <button id="aboutBtn">About</button>
       </div>
-      <div class="small" style="margin-top:8px">Factorio Space System Editor v7.49</div>
+      <div class="small" style="margin-top:8px">Factorio Space System Editor v7.50</div>
     </div>
     <div id="mapHelp">
       <span class="navLine"><b>Navigation:</b> wheel = zoom · drag empty space or use <b>WASD</b> = pan</span>
@@ -1862,6 +1862,7 @@ input[type="number"]::-webkit-outer-spin-button{
               <li><b>File locations:</b> pasted paths are stored as labels only; browser security does not allow a typed local path to grant filesystem access. Use the folder button to authorize the actual directory.</li>
               <li><b>Set both to editor directory:</b> browsers cannot discover or authorize the HTML file's parent directory automatically. This button opens a folder picker and asks you to select the folder containing the editor, then uses that authorized folder for both system and model files.</li>
               <li><b>Draggable windows:</b> New, Edit, Save / Open, View, Help, and About can be moved by dragging their title bars. This lets you keep the working map visible while changing settings that affect the map.</li>
+              <li><b>Project repository:</b> About → <b>GitHub Repository ↗</b> opens the public project repository in a new tab for source code, issues, forks, and other GitHub project actions.</li>
               <li><b>Information icons:</b> hover or focus an <b>i</b> icon to open its explanation in a detached page-level tooltip above the menu windows. The tooltip is not part of the dialog's scroll area, so long explanations cannot expand/clamp the parent window or create a disappearing scrollbar. The tooltip automatically chooses an on-screen side of the icon and can be scrolled directly if its content is taller than the viewport.</li>
               <li>When the browser supports the File System Access API, approved folder handles are remembered with IndexedDB. If direct folder access is unavailable, Save falls back to downloads and Load uses normal file import; browser-saved custom models still work.</li>
               <li>Use ☰ → About for build metadata and the built-in version changelog.</li>
@@ -1995,8 +1996,8 @@ input[type="number"]::-webkit-outer-spin-button{
               <li>When both solar percentage and temperature exist, the editor displays the solar estimate, thermal estimate/band, and a geometric-midpoint planning suggestion. This is a layout heuristic, not a climate simulation: albedo, atmosphere/greenhouse effects, emissivity, and internal heating can make temperature differ substantially from a simple orbital estimate.</li>
               <li>For star-centered orbit rings with guided planets, moons, or orbital points attached, the map and orbit card show a suggested ring-distance label. Multiple guided bodies on one ring show a shared midpoint and range rather than moving the ring.</li>
               <li>Use ☰ → Distance Guides to switch between the sample calibrated profile and inverse-square model, edit inverse-square reference values, or hide/show star-distance/solar overlays. Manual route target guides remain explicit route-authoring aids.</li>
-            </ul>
-          </div>        </details>
+            </ul>          </div>
+        </details>
 
         <details>
           <summary>Selection, deletion, copy & paste</summary>
@@ -2092,12 +2093,13 @@ input[type="number"]::-webkit-outer-spin-button{
         <div id="aboutView">
           <dl class="aboutMeta">
             <dt>Tool</dt><dd>Factorio Space System Editor</dd>
-            <dt>Version</dt><dd>7.49</dd>
+            <dt>Version</dt><dd>7.50</dd>
             <dt>Edition</dt><dd>Standalone / shareable Factorio edition</dd>
             <dt>Build date</dt><dd>November 19, 2026</dd>
             <dt>Purpose</dt><dd>Interactive visual planning and reference editor for star systems, orbital hierarchies, routes, distances, and related spatial layouts.</dd>
             <dt>Development disclosure</dt><dd>This community tool was designed and iteratively developed by Skelly with assistance from ChatGPT by OpenAI for implementation, debugging, documentation, and feature iteration. Human direction, requirements, testing, and acceptance decisions shaped the tool throughout development.</dd>
             <dt>Affiliation</dt><dd>Unofficial community tool. It is not affiliated with or endorsed by Wube Software.</dd>
+            <dt>Repository</dt><dd><a href="https://github.com/skellitor301/factorio-space-system-editor" target="_blank" rel="noopener noreferrer">github.com/skellitor301/factorio-space-system-editor</a></dd>
                         <dt>Primary data</dt><dd>Nodes, orbit rings, parent/orbit relationships, routes and travel distances, temperatures, Solar power in orbit / atmosphere values, climate diagnostics, passive route/orbital guide state and calibration, node-info overlay visibility, star appearance, system title, and editor viewport.</dd>
             <dt>Persistence</dt><dd>Browser-local autosave plus JSON import/export.</dd>
             <dt>Distance model</dt><dd>Supports map units and km. Default working visual scale is 500 km per map unit and can be customized per layout.</dd>
@@ -2107,6 +2109,7 @@ input[type="number"]::-webkit-outer-spin-button{
           <div class="aboutActions">
             <button id="openChangelogBtn" type="button" class="primary">View Changelog</button>
             <button id="aboutHelpBtn" type="button">Open Help</button>
+            <button id="openRepositoryBtn" type="button">GitHub Repository ↗</button>
           </div>
 
           <div class="aboutNote">
@@ -2116,6 +2119,11 @@ input[type="number"]::-webkit-outer-spin-button{
 
         <div id="changelogView">
           <button id="changelogBackBtn" type="button">← Back to About</button>
+
+          <div class="changelogEntry"><h3>v7.50 <span class="changeDate">— November 21, 2026</span></h3><ul>
+            <li>Added a public GitHub repository link and <b>GitHub Repository ↗</b> button to About.</li>
+            <li>The repository button opens the project in a new tab so users can inspect source code, report issues, fork the project, or use other GitHub project features without leaving their editor session.</li>
+          </ul></div>
 
           <div class="changelogEntry"><h3>v7.49 <span class="changeDate">— November 21, 2026</span></h3><ul>
             <li>Added a community-release development disclosure to About, crediting the project's human direction and the use of ChatGPT by OpenAI during implementation, debugging, documentation, and iteration.</li>
@@ -2987,15 +2995,15 @@ function generateRandomSystem(modelOverride=null,modelId='builtin:nauvis'){
     ).toFixed(3));
   };
 
-  const ordered=planetNames.slice().sort((n1,n2)=>{
-    const a=nodes[n1];
+  const ordered=planetNames.slice().sort((n1,n2)=>{    const a=nodes[n1];
     const b=nodes[n2];
 
     return Math.hypot(a.x-nodes[slipName].x,a.y-nodes[slipName].y)-
            Math.hypot(b.x-nodes[slipName].x,b.y-nodes[slipName].y);
   });
 
-  if(ordered.length){    routes.push({
+  if(ordered.length){
+    routes.push({
       id:'route-slipstream-'+ordered[0].toLowerCase().replace(/[^a-z0-9]+/g,'-'),
       a:slipName,
       b:ordered[0],
@@ -3986,15 +3994,15 @@ function referenceTemperatureDistanceKm(tempK){
   };
 }
 
-function solarGuideSuggestion(n){
-  if(!supportsSolarPower(n)) return null;
+function solarGuideSuggestion(n){  if(!supportsSolarPower(n)) return null;
 
   const mode=solarGuideModelName();
   const refKm=solarGuideReferenceKm();
   const refTemp=solarGuideReferenceTempK();
   const outerKm=solarGuideOuterKm();
 
-  const p=Number(n.solar_power_in_orbit_percent);  const t=Number(n.temperature_K);
+  const p=Number(n.solar_power_in_orbit_percent);
+  const t=Number(n.temperature_K);
   const hasSolar=Number.isFinite(p) && p>0;
   const hasTemp=Number.isFinite(t) && t>0;
 
@@ -4985,15 +4993,15 @@ const solarGuideModel = document.getElementById('solarGuideModel');
 const referenceGuideSummary = document.getElementById('referenceGuideSummary');
 const inverseSquareGuideControls = document.getElementById('inverseSquareGuideControls');
 const solarGuideReferencePercentInput = document.getElementById('solarGuideReferencePercent');
-const solarGuideAtmospherePercentInput = document.getElementById('solarGuideAtmospherePercent');
-const solarGuideReferenceKmInput = document.getElementById('solarGuideReferenceKm');
+const solarGuideAtmospherePercentInput = document.getElementById('solarGuideAtmospherePercent');const solarGuideReferenceKmInput = document.getElementById('solarGuideReferenceKm');
 const solarGuideReferenceTempInput = document.getElementById('solarGuideReferenceTemp');
 const solarGuideTempReferenceKmInput = document.getElementById('solarGuideTempReferenceKm');
 const solarGuideOuterKmInput = document.getElementById('solarGuideOuterKmInput');
 
 const jsonSystemsTab = document.getElementById('jsonSystemsTab');
 const jsonModelsTab = document.getElementById('jsonModelsTab');
-const jsonLibrarySelect = document.getElementById('jsonLibrarySelect');const jsonLibraryDropdownLabel = document.getElementById('jsonLibraryDropdownLabel');
+const jsonLibrarySelect = document.getElementById('jsonLibrarySelect');
+const jsonLibraryDropdownLabel = document.getElementById('jsonLibraryDropdownLabel');
 const jsonSaveBtn = document.getElementById('jsonSaveBtn');
 const jsonLoadBtn = document.getElementById('jsonLoadBtn');
 const jsonCopyBtn = document.getElementById('jsonCopyBtn');
@@ -5052,6 +5060,7 @@ const changelogView = document.getElementById('changelogView');
 const openChangelogBtn = document.getElementById('openChangelogBtn');
 const changelogBackBtn = document.getElementById('changelogBackBtn');
 const aboutHelpBtn = document.getElementById('aboutHelpBtn');
+const openRepositoryBtn=document.getElementById('openRepositoryBtn');
 
 
 const RECENT_SYSTEMS_KEY='factorio-space-system-editor-recent-systems-v1';
@@ -5939,6 +5948,15 @@ aboutHelpBtn.addEventListener('click',()=>{
 });
 
 
+openRepositoryBtn.addEventListener('click',()=>{
+  window.open(
+    'https://github.com/skellitor301/factorio-space-system-editor',
+    '_blank',
+    'noopener,noreferrer'
+  );
+});
+
+
 
 function applyTheme(theme){
   const value = ['auto','light','dark'].includes(theme) ? theme : 'auto';
@@ -5974,8 +5992,7 @@ solarGuideModel.addEventListener('change',e=>{
     ? 'reference'
     : 'inverse-square';
 
-  if(metadata.guide_solar_model==='inverse-square'){
-    metadata.guide_model_library_id='current:inverse-square';
+  if(metadata.guide_solar_model==='inverse-square'){    metadata.guide_model_library_id='current:inverse-square';
     delete metadata.guide_reference_solar_anchors;
     delete metadata.guide_reference_temperature_anchors;
   }else{
@@ -5992,7 +6009,8 @@ function commitInverseSquareModelNumber(update){
   render();
 }
 
-solarGuideReferencePercentInput.addEventListener('change',e=>{  commitInverseSquareModelNumber(()=>{
+solarGuideReferencePercentInput.addEventListener('change',e=>{
+  commitInverseSquareModelNumber(()=>{
     metadata.guide_solar_reference_percent=Math.max(.01,+e.target.value||300);
   });
 });
@@ -6974,7 +6992,6 @@ function orbitResizeCaptureCandidate(orbitId,rawRadius,pointerPoint){
 
     const exactRadius=Math.hypot(n.x-anchor.x,n.y-anchor.y);
     const ringGap=Math.abs(exactRadius-rawRadius);
-
     // The ring also has to physically reach/touch the visible node.
     if(ringGap>nodeRadius(n)) continue;
 
@@ -6991,7 +7008,8 @@ function orbitResizeCaptureCandidate(orbitId,rawRadius,pointerPoint){
         exactRadius,
         mouseDistance,
         ringGap
-      };    }
+      };
+    }
   }
 
   return best;
@@ -7972,8 +7990,7 @@ function drawNodes(){
       }
       render();
     });
-    nodeLayer.appendChild(g);
-  }
+    nodeLayer.appendChild(g);  }
 }
 
 function pointInSvg(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
@@ -7990,7 +8007,8 @@ svg.addEventListener('pointermove',e=>{
   lastMapPointer={x:p.x,y:p.y};
 
   if(routeGesture){
-    routeGesture.current={x:p.x,y:p.y};    routeGesture.target=nodeNearPoint(p,routeGesture.from);
+    routeGesture.current={x:p.x,y:p.y};
+    routeGesture.target=nodeNearPoint(p,routeGesture.from);
     seedMapLabelReservations();
     drawRoutes();
     drawNodes();
@@ -8972,7 +8990,6 @@ function orbitCards(){
         e.preventDefault();
         return;
       }
-
       card.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
       e.dataTransfer.setData('text/x-system-orbit',o.id);
@@ -8989,6 +9006,7 @@ function orbitCards(){
     card.addEventListener('dragover',e=>{
       const dragged=e.dataTransfer.getData('text/x-system-orbit');
       if(!dragged || dragged===o.id) return;
+
       e.preventDefault();
       e.dataTransfer.dropEffect='move';
 
@@ -9970,8 +9988,7 @@ jsonLoadBtn.addEventListener('click',async()=>{
     const sourceId=entry.source_id ||
       (entry.source==='folder' ? `folder:${entry.filename}` : 'current');
     applySolarModel(entry.model,sourceId);
-  }
-});
+  }});
 
 jsonCopyBtn.addEventListener('click',async()=>{
   let text='';
@@ -9988,7 +10005,8 @@ jsonCopyBtn.addEventListener('click',async()=>{
   try{
     await navigator.clipboard.writeText(text);
     const old=jsonCopyBtn.textContent;
-    jsonCopyBtn.textContent='Copied';    setTimeout(()=>jsonCopyBtn.textContent=old,900);
+    jsonCopyBtn.textContent='Copied';
+    setTimeout(()=>jsonCopyBtn.textContent=old,900);
   }catch(_){
     prompt('Copy JSON:',text);
   }
