@@ -87,21 +87,6 @@ Typed directory paths are retained as labels, but a typed path alone cannot gran
 
 Browsers without direct folder access can still use ordinary download/upload, copy/paste, drag/drop, and browser-local storage.
 
-## Useful interaction notes
-
-- Mouse wheel: zoom.
-- Drag empty map space or use WASD: pan.
-- Drag a node: move it.
-- Drag an orbit ring: resize it.
-- Hold Shift while dragging/resizing: temporary free movement; release to snap.
-- Ctrl-drag from a node: create a route.
-- Double-click a node body: toggle its lock.
-- Alt: toggle additional node information.
-- Numeric fields support keyboard stepping and commit changes live when stepped.
-- New/Edit/Save/Open/View/Help/About windows can be dragged by their title bars.
-
-The editor contains a much more complete Help section covering snapping, orbital parenting, route guides, model behavior, JSON workflows, and keyboard controls.
-
 ## Data and privacy
 
 The editor is a local HTML application.
