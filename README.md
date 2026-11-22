@@ -1,7 +1,5 @@
 # Factorio Space System Editor
 
-[**▶ Launch Factorio Space System Editor**](https://skellitor301.github.io/factorio-space-system-editor/)
-
 **Factorio Space System Editor** is a standalone, browser-based visual editor for planning and documenting Factorio-style space systems.
 
 It is intended for mod authors, modpack maintainers, compatibility-patch authors, and players who want to prototype stellar layouts before translating them into Factorio mod data.
@@ -89,6 +87,21 @@ Typed directory paths are retained as labels, but a typed path alone cannot gran
 
 Browsers without direct folder access can still use ordinary download/upload, copy/paste, drag/drop, and browser-local storage.
 
+## Useful interaction notes
+
+- Mouse wheel: zoom.
+- Drag empty map space or use WASD: pan.
+- Drag a node: move it.
+- Drag an orbit ring: resize it.
+- Hold Shift while dragging/resizing: temporary free movement; release to snap.
+- Ctrl-drag from a node: create a route.
+- Double-click a node body: toggle its lock.
+- Alt: toggle additional node information.
+- Numeric fields support keyboard stepping and commit changes live when stepped.
+- New/Edit/Save/Open/View/Help/About windows can be dragged by their title bars.
+
+The editor contains a much more complete Help section covering snapping, orbital parenting, route guides, model behavior, JSON workflows, and keyboard controls.
+
 ## Data and privacy
 
 The editor is a local HTML application.
@@ -97,9 +110,9 @@ It does not require an account and does not need a remote service to edit layout
 
 ## Development disclosure
 
-For transparency: **Factorio Space System Editor was designed and iteratively developed by Skellitor301 with assistance from ChatGPT by OpenAI.**
+For transparency: **Factorio Space System Editor was designed and iteratively developed by Skelly with assistance from ChatGPT by OpenAI.**
 
-ChatGPT was used during implementation, debugging, documentation, UI iteration, and feature development. The tool's requirements, workflow decisions, testing feedback, and acceptance decisions were directed by Skellitor301 throughout development.
+ChatGPT was used during implementation, debugging, documentation, UI iteration, and feature development. The tool's requirements, workflow decisions, testing feedback, and acceptance decisions were directed by Skelly throughout development.
 
 ## Unofficial community project
 
@@ -109,7 +122,7 @@ Factorio-related names and game concepts are used to describe the tool's intende
 
 ## Current release
 
-Repository build: **v7.49**
+Repository build: **v7.50**
 
 The editor includes its own cumulative in-app changelog under **About → Changelog**.
 
