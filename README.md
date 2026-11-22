@@ -1,5 +1,7 @@
 # Factorio Space System Editor
 
+[**▶ Launch Factorio Space System Editor**](https://skellitor301.github.io/factorio-space-system-editor/)
+
 **Factorio Space System Editor** is a standalone, browser-based visual editor for planning and documenting Factorio-style space systems.
 
 It is intended for mod authors, modpack maintainers, compatibility-patch authors, and players who want to prototype stellar layouts before translating them into Factorio mod data.
