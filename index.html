@@ -2120,6 +2120,10 @@ input[type="number"]::-webkit-outer-spin-button{
         <div id="changelogView">
           <button id="changelogBackBtn" type="button">← Back to About</button>
 
+          <div class="changelogEntry"><h3>v7.51 <span class="changeDate">— November 21, 2026</span></h3><ul>
+            <li>Updated all public-facing creator attribution to use the full online handle <b>Skellitor301</b>.</li>
+          </ul></div>
+
           <div class="changelogEntry"><h3>v7.50 <span class="changeDate">— November 21, 2026</span></h3><ul>
             <li>Added a public GitHub repository link and <b>GitHub Repository ↗</b> button to About.</li>
             <li>The repository button opens the project in a new tab so users can inspect source code, report issues, fork the project, or use other GitHub project features without leaving their editor session.</li>
@@ -2991,11 +2995,11 @@ function generateRandomSystem(modelOverride=null,modelId='builtin:nauvis'){
     const b=nodes[bName];
 
     return Number((
-      Math.hypot(a.x-b.x,a.y-b.y)*scale
-    ).toFixed(3));
+      Math.hypot(a.x-b.x,a.y-b.y)*scale    ).toFixed(3));
   };
 
-  const ordered=planetNames.slice().sort((n1,n2)=>{    const a=nodes[n1];
+  const ordered=planetNames.slice().sort((n1,n2)=>{
+    const a=nodes[n1];
     const b=nodes[n2];
 
     return Math.hypot(a.x-nodes[slipName].x,a.y-nodes[slipName].y)-
@@ -3990,11 +3994,11 @@ function referenceTemperatureDistanceKm(tempK){
   return {
     km:Math.min(km,outer),
     band:false,
-    lowerBound:km>=outer
-  };
+    lowerBound:km>=outer  };
 }
 
-function solarGuideSuggestion(n){  if(!supportsSolarPower(n)) return null;
+function solarGuideSuggestion(n){
+  if(!supportsSolarPower(n)) return null;
 
   const mode=solarGuideModelName();
   const refKm=solarGuideReferenceKm();
@@ -4989,11 +4993,11 @@ const importSolarModelBtn = document.getElementById('importSolarModelBtn');
 const importSolarModelFile = document.getElementById('importSolarModelFile');
 const activeSolarModelSummary = document.getElementById('activeSolarModelSummary');
 
-const solarGuideModel = document.getElementById('solarGuideModel');
-const referenceGuideSummary = document.getElementById('referenceGuideSummary');
+const solarGuideModel = document.getElementById('solarGuideModel');const referenceGuideSummary = document.getElementById('referenceGuideSummary');
 const inverseSquareGuideControls = document.getElementById('inverseSquareGuideControls');
 const solarGuideReferencePercentInput = document.getElementById('solarGuideReferencePercent');
-const solarGuideAtmospherePercentInput = document.getElementById('solarGuideAtmospherePercent');const solarGuideReferenceKmInput = document.getElementById('solarGuideReferenceKm');
+const solarGuideAtmospherePercentInput = document.getElementById('solarGuideAtmospherePercent');
+const solarGuideReferenceKmInput = document.getElementById('solarGuideReferenceKm');
 const solarGuideReferenceTempInput = document.getElementById('solarGuideReferenceTemp');
 const solarGuideTempReferenceKmInput = document.getElementById('solarGuideTempReferenceKm');
 const solarGuideOuterKmInput = document.getElementById('solarGuideOuterKmInput');
@@ -5988,11 +5992,11 @@ nodeInfoOverlayEnabled.addEventListener('change',e=>{
 });
 
 solarGuideModel.addEventListener('change',e=>{
-  metadata.guide_solar_model=e.target.value==='reference'
-    ? 'reference'
+  metadata.guide_solar_model=e.target.value==='reference'    ? 'reference'
     : 'inverse-square';
 
-  if(metadata.guide_solar_model==='inverse-square'){    metadata.guide_model_library_id='current:inverse-square';
+  if(metadata.guide_solar_model==='inverse-square'){
+    metadata.guide_model_library_id='current:inverse-square';
     delete metadata.guide_reference_solar_anchors;
     delete metadata.guide_reference_temperature_anchors;
   }else{
@@ -6987,11 +6991,11 @@ function orbitResizeCaptureCandidate(orbitId,rawRadius,pointerPoint){
 
     // The object has to be genuinely near the resize cursor. This prevents an
     // expanding ring from adopting an unrelated node elsewhere on the circle.
-    const mouseThreshold=Math.max(.8,nodeRadius(n)+.35);
-    if(mouseDistance>mouseThreshold) continue;
+    const mouseThreshold=Math.max(.8,nodeRadius(n)+.35);    if(mouseDistance>mouseThreshold) continue;
 
     const exactRadius=Math.hypot(n.x-anchor.x,n.y-anchor.y);
     const ringGap=Math.abs(exactRadius-rawRadius);
+
     // The ring also has to physically reach/touch the visible node.
     if(ringGap>nodeRadius(n)) continue;
 
@@ -7986,11 +7990,11 @@ function drawNodes(){
           ? {parent:n.parent||null,orbit_id:n.orbit_id||null}
           : null;
         draggingNode=name;
-        svg.setPointerCapture(e.pointerId);
-      }
+        svg.setPointerCapture(e.pointerId);      }
       render();
     });
-    nodeLayer.appendChild(g);  }
+    nodeLayer.appendChild(g);
+  }
 }
 
 function pointInSvg(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
@@ -8985,11 +8989,11 @@ function orbitCards(){
     card.appendChild(trash);
     orbitList.appendChild(card);
 
-    card.addEventListener('dragstart',e=>{
-      if(e.target.closest('input,select,button,textarea')){
+    card.addEventListener('dragstart',e=>{      if(e.target.closest('input,select,button,textarea')){
         e.preventDefault();
         return;
       }
+
       card.classList.add('dragging');
       e.dataTransfer.effectAllowed='move';
       e.dataTransfer.setData('text/x-system-orbit',o.id);
@@ -9984,11 +9988,11 @@ jsonLoadBtn.addEventListener('click',async()=>{
   const entries=unifiedModelEntries();
   const entry=entries.find(x=>x.value===value);
 
-  if(entry?.model){
-    const sourceId=entry.source_id ||
+  if(entry?.model){    const sourceId=entry.source_id ||
       (entry.source==='folder' ? `folder:${entry.filename}` : 'current');
     applySolarModel(entry.model,sourceId);
-  }});
+  }
+});
 
 jsonCopyBtn.addEventListener('click',async()=>{
   let text='';
