@@ -95,9 +95,9 @@ It does not require an account and does not need a remote service to edit layout
 
 ## Development disclosure
 
-For transparency: **Factorio Space System Editor was designed and iteratively developed by Skelly with assistance from ChatGPT by OpenAI.**
+For transparency: **Factorio Space System Editor was designed and iteratively developed by Skellitor301 with assistance from ChatGPT by OpenAI.**
 
-ChatGPT was used during implementation, debugging, documentation, UI iteration, and feature development. The tool's requirements, workflow decisions, testing feedback, and acceptance decisions were directed by Skelly throughout development.
+ChatGPT was used during implementation, debugging, documentation, UI iteration, and feature development. The tool's requirements, workflow decisions, testing feedback, and acceptance decisions were directed by Skellitor301 throughout development.
 
 ## Unofficial community project
 
